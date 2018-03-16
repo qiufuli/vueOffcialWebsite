@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <!--:title 该指令的意思是：“将这个元素节点的 title 特性和 Vue 实例的 titleMes 属性保持一致”。-->
+        <span :title="titleMes">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+
+</body>
+<script>
+    var app = new Vue({
+        el:'#app',//作用域
+        data:{
+            message:'hello world',
+            titleMes:'页面加载于'+new Date().toLocaleString() //toLocaleString (w3c)把数组转换为本地字符串。
+        }
+    })
+</script>
+</html>

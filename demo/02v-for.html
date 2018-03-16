@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for</title>
+    <script src="../assets/js/vue.js"></script>
+    <style>
+    	.active{
+    		color:red;
+    	}
+    </style>
+</head>
+
+<body>
+    <h1>v-for 解决模板循环问题</h1>
+    <hr>
+    <div id="app">
+        <ul>
+            <li v-for="num in nums">
+                {{num}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="item in sortItems">
+                {{item}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(student,index) in sortStudents" :class="{active:index==1}">
+                {{index}}{{student.name}} --{{student.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        //  声明的时候new Vue 大写
+        var app = new Vue({
+            // 作用域
+            el: "#app",
+            data: {
+                items: [23, 123, 34, 432, 122, 63, 1],    
+                nums: [23, 123, 34, 432, 122, 63, 1],
+                students: [
+                    { name: 'JackQiu', age: 123 },
+                    { name: 'JackQiu2', age: 33 },
+                    { name: 'JackQiu3', age: 43 },
+                    { name: 'JackQiu4', age: 530 }
+                ],
+                active:'active'
+            },
+            computed: {
+                //    vue 不能直接对数组进行操作 除了直接改变数组【1,23】
+                // 需要心命名一个 对数组进行操作 之后循环的是新命名的
+                nums1:function(){
+                    return [1,2,3,4,5,6,7];
+                },
+                sortItems: function () {
+                    return this.items.sort(sortNum);
+                },
+                // 调用对象时 一定别忘了用this调用！！！！！！！！
+                sortStudents: function () {
+                    return sortByKey(this.students, 'age');
+                }
+            }
+        });
+
+        function sortNum(a, b) {
+            return a - b;
+        }
+
+        //数组对象方法排序:
+        function sortByKey(array, key) {
+            return array.sort(function (a, b) {
+                var x = a[key];
+                var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        }
+    </script>
+</body>
+
+</html>

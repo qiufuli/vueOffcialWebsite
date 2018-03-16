@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>v-on事件监听器</h1>
+    <hr>
+    <div id="app">
+        <!-- 数据绑定 -->
+        本场比赛得分:{{grade}}
+        <p>
+            <!--  绑定事件v-on：  @ -->
+            <button v-on:click="addGrade">加分</button>
+            <button @click="minusGrade">减分</button>
+            <br>
+            <br>
+            <input type="text" @keyup.13="onenter" v-model="grade02">
+        </p>
+    </div>
+    <script type="text/javascript">
+        //  声明的时候new Vue 大写
+        var app = new Vue({
+            // 作用域
+            el: "#app",
+            data: {
+                // 相当于$scope.message
+                grade: 0,
+                grade02:1
+            },
+            // methods 是写事件方法的 computed是对数据进行操作的 
+            methods: {
+                addGrade: function () {
+                    this.grade++;
+                },
+                minusGrade: function () {
+                    if (this.grade > 0) {
+                        this.grade--;
+                    }
+                },
+                onenter :function(){
+                    //  2个数相加可能成字符串 所以parseInt一下
+                    this.grade = this.grade + parseInt(this.grade02);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

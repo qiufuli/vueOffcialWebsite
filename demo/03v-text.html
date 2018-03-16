@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text </title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>v-text v-html</h1>
+    <hr>
+    <div id="app">
+        <!-- 数据绑定 -->
+        <!-- 网速慢或书写错误的时候 会显示{{xx}} 很不友好 
+             用v-text更好一些 有点像ng-bind不过比ng-bind还舒服一些 -->
+        <span>{{message}}</span>=<span v-text="message"></span><hr>
+        <span v-text="dodo"></span><hr>
+        <!-- v-html可以解析标签 
+            但v-html不推荐总用容易被黑客xss攻击对网站不安全（特别是表单验证）
+            在或者测试人员哪里可能也会出现问题 
+        -->
+        <span v-html="dodo"></span>
+    </div>
+    <script type="text/javascript">
+    //  声明的时候new Vue 大写
+        var app = new Vue({
+            // 作用域
+            el: "#app",
+            data: {
+                // 相当于$scope.message
+                message: "hello world",
+                dodo:'<h2>hello world<h2>'
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">	
+			<ul>
+				<todo-item v-for="item in groceryList" :todo="item" :key="item.id"></todo-item>
+			</ul>
+		</div>
+	</body>
+	<script>
+		Vue.component('todo-item',{
+			//但是这样会为每个待办项渲染同样的文本，这看起来并不炫酷。我们应该能从父作用域将数据传到子组件才对 所以需要多传一个props
+//			template:'<li>这是component引入</li>'
+			props:['todo'],
+			template:'<li>{{todo.text}}<li>'
+			
+		})
+		var app = new Vue({
+			el:'#app',
+			data:{
+				groceryList: [
+			      { id: 0, text: '蔬菜' },
+			      { id: 1, text: '奶酪' },
+			      { id: 2, text: '随便其它什么人吃的东西' }
+			    ]
+			}
+		})
+	</script>
+</html>
